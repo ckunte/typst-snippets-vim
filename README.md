@@ -42,7 +42,7 @@ To be able to use snippets, the following are required:
 
 1. Vim or Neovim with python3 support.
 2. [UltiSnips][us] 
-3. [latex-snippets-vim][ck]
+3. [typst-snippets-vim][ck]
 
 ## Installation
 
