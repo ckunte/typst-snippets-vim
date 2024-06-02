@@ -1,3 +1,21 @@
+snippet lnk "Link" b
+#link("${1:url}")[${2:label}]
+endsnippet
+
+snippet lscape "Landscape" b
+// set page to landscape
+#set page(
+  flipped: true,
+)
+
+${0}
+
+//set page back to portrait
+#set page(
+  flipped: false,
+)
+endsnippet
+
 snippet apdx "Appendix" b
 #pagebreak(weak: true)
 // appendix
@@ -35,7 +53,7 @@ snippet fig "Figure" b
 ) <${3:label}>
 endsnippet
 
-snippet fl "File" b
+snippet file "File" b
 #include "${1:filename_incl_path}"
 endsnippet
 

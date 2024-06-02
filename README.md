@@ -10,9 +10,10 @@ This repository contains the following custom snippets:
 | `bib` + <kbd>tab</kbd>    | bibliography entry |
 | `cod` + <kbd>tab</kbd>    | code file          |
 | `fig` + <kbd>tab</kbd>    | figure block       |
-| `fl` + <kbd>tab</kbd>     | file               |
-| `hd` + <kbd>tab</kbd>     | Set heading number |
+| `file` + <kbd>tab</kbd>   | file               |
+| `hd` + <kbd>tab</kbd>     | set heading number |
 | `letter` + <kbd>tab</kbd> | letter block       |
+| `lnk` + <kbd>tab</kbd>    | add link           |
 | `ltmpl` + <kbd>tab</kbd>  | letter template    |
 | `note` + <kbd>tab</kbd>   | note block         |
 | `ntmpl` + <kbd>tab</kbd>  | note template      |
