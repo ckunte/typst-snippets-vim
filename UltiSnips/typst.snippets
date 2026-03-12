@@ -16,6 +16,19 @@ ${0}
 )
 endsnippet
 
+snippet ctbl "CSV Table" b
+#let ${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\l$1$2$3)/g} = csv("${1:name}.csv")
+#figure(
+  table(
+  columns: 2,
+  inset: 10pt,
+  align: left,
+  ..for (col1, col2) in ${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\l$1$2$3)/g}} { (col1, col2) }
+  ),
+  caption: [${2:desc}],
+) <${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\l$1$2$3)/g}>
+endsnippet
+
 snippet apdx "Appendix" b
 #pagebreak(weak: true)
 // appendix

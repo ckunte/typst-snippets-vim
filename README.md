@@ -19,6 +19,8 @@ This repository contains the following custom snippets:
 | `pb` + <kbd>tab</kbd>     | page break         |
 | `ref` + <kbd>tab</kbd>    | bibliography block |
 | `tbl` + <kbd>tab</kbd>    | table block        |
+| `ctbl` + <kbd>tab</kbd>   | csv table block    |
+
 
 ## What are snippets and how do they work?
 
