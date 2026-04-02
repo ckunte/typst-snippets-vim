@@ -2,6 +2,12 @@ snippet lnk "Link" b
 #link("${1:url}")[${2:label}]
 endsnippet
 
+snippet pdfr "Insert a range of PDF pages" b
+#for p in range(${2:first_page_in_range}, ${3:last_page_in_range}){
+  image("${1:some_document}.pdf", page: p, width: 100%)
+}
+endsnippet
+
 snippet lscape "Landscape" b
 // set page to landscape
 #set page(

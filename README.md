@@ -4,23 +4,23 @@ Typesetting documents, letters, reports, or even books in [Typst] is not as verb
 
 This repository contains the following custom snippets:
 
-| Snippet                   | Inserts            |
-| ------------------------- | ------------------ |
-| `apdx` + <kbd>tab</kbd>   | appendix block     |
-| `bib` + <kbd>tab</kbd>    | bibliography entry |
-| `cod` + <kbd>tab</kbd>    | code file          |
-| `fig` + <kbd>tab</kbd>    | figure block       |
-| `file` + <kbd>tab</kbd>   | file               |
-| `hd` + <kbd>tab</kbd>     | set heading number |
-| `letter` + <kbd>tab</kbd> | letter block       |
-| `lnk` + <kbd>tab</kbd>    | add link           |
-| `ltmpl` + <kbd>tab</kbd>  | letter template    |
-| `note` + <kbd>tab</kbd>   | note block         |
-| `pb` + <kbd>tab</kbd>     | page break         |
-| `ref` + <kbd>tab</kbd>    | bibliography block |
-| `tbl` + <kbd>tab</kbd>    | table block        |
-| `ctbl` + <kbd>tab</kbd>   | csv table block    |
-
+| Snippet                   | Inserts              |
+| ------------------------- | -------------------- |
+| `apdx` + <kbd>tab</kbd>   | appendix block       |
+| `bib` + <kbd>tab</kbd>    | bibliography entry   |
+| `cod` + <kbd>tab</kbd>    | code file            |
+| `fig` + <kbd>tab</kbd>    | figure block         |
+| `file` + <kbd>tab</kbd>   | file                 |
+| `hd` + <kbd>tab</kbd>     | set heading number   |
+| `letter` + <kbd>tab</kbd> | letter block         |
+| `lnk` + <kbd>tab</kbd>    | add link             |
+| `ltmpl` + <kbd>tab</kbd>  | letter template      |
+| `note` + <kbd>tab</kbd>   | note block           |
+| `pb` + <kbd>tab</kbd>     | page break           |
+| `pdfr` + <kbd>tab</kbd>   | PDF pages in a range |
+| `ref` + <kbd>tab</kbd>    | bibliography block   |
+| `tbl` + <kbd>tab</kbd>    | table block          |
+| `ctbl` + <kbd>tab</kbd>   | csv table block      |
 
 ## What are snippets and how do they work?
 
