@@ -11,6 +11,7 @@ This repository contains the following custom snippets:
 | `cod` + <kbd>tab</kbd>    | code file            |
 | `fig` + <kbd>tab</kbd>    | figure block         |
 | `file` + <kbd>tab</kbd>   | file                 |
+| `gal` + <kbd>tab</kbd>    | image gallery        |
 | `hd` + <kbd>tab</kbd>     | set heading number   |
 | `letter` + <kbd>tab</kbd> | letter block         |
 | `lnk` + <kbd>tab</kbd>    | add link             |
