@@ -95,17 +95,15 @@ snippet hd "Set heading number format hereon" b
 #set heading(numbering: "1.1")
 endsnippet
 
-snippet note "Note" b
-#import "template.typ": *
+snippet note "Insert note preamble" b
+#import "@local/note:0.1.0":note // (alternatively: #import "template.typ": *)
 #show: note.with(
   title: [${1:Title}],
   author: "${2:Author}",
   paper: "a4",
 )
-// get template.typ from github.com/ckunte/note
-// curl -LJO <rawfile url here>
-//
 // content from here-on
+${3:content from hereon}
 endsnippet
 
 snippet pb "Page break" b
