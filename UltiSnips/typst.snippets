@@ -22,17 +22,16 @@ ${0}
 )
 endsnippet
 
-snippet ctbl "CSV Table" b
-#let ${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\l$1$2$3)/g} = csv("${1:name}.csv")
+snippet ctb "CSV Table" b
 #figure(
   table(
-  columns: 2,
+  columns: ${1:cols},
   inset: 10pt,
   align: left,
-  ..for (col1, col2) in ${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\l$1$2$3)/g}} { (col1, col2) }
+  ..csv("${2:data}.csv").flatten(),
   ),
-  caption: [${2:desc}],
-) <${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\l$1$2$3)/g}>
+  caption: [${3:Desc}],
+) <${4:reftag}>
 endsnippet
 
 snippet apdx "Appendix" b
