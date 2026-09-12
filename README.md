@@ -9,19 +9,48 @@ This repository contains the following custom snippets:
 | `apdx` + <kbd>tab</kbd>   | appendix block       |
 | `bib` + <kbd>tab</kbd>    | bibliography entry   |
 | `cod` + <kbd>tab</kbd>    | code file            |
+| `ctb` + <kbd>tab</kbd>    | csv table block      |
 | `fig` + <kbd>tab</kbd>    | figure block         |
+| `fgg` + <kbd>tab</kbd>    | figures block in grid |
+| `fgr` + <kbd>tab</kbd>    | figure (rotated) block |
 | `file` + <kbd>tab</kbd>   | file                 |
 | `gal` + <kbd>tab</kbd>    | image gallery        |
 | `hd` + <kbd>tab</kbd>     | set heading number   |
 | `letter` + <kbd>tab</kbd> | letter block         |
 | `lnk` + <kbd>tab</kbd>    | add link             |
+| `lscape` + <kbd>tab</kbd> | set page to landscape |
 | `ltmpl` + <kbd>tab</kbd>  | letter template      |
 | `note` + <kbd>tab</kbd>   | note block           |
+| `ntmpl` + <kbd>tab</kbd>  | note template        |
 | `pb` + <kbd>tab</kbd>     | page break           |
 | `pdfr` + <kbd>tab</kbd>   | PDF pages in a range |
 | `ref` + <kbd>tab</kbd>    | bibliography block   |
 | `tbl` + <kbd>tab</kbd>    | table block          |
-| `ctbl` + <kbd>tab</kbd>   | csv table block      |
+| `toc` + <kbd>tab</kbd>    | TOC block            |
+| `ttl` + <kbd>tab</kbd>    | title block          |
+
+Some custom snippets (scope specific):
+
+| Snippet                  | Inserts                    |
+| ------------------------ | -------------------------- |
+| `dwg` + <kbd>tab</kbd>   | Insert a PDF drawing       |
+| `loc` + <kbd>tab</kbd>   | Insert location figure     |
+| `mrk` + <kbd>tab</kbd>   | Insert markup dwg rotated  |
+| `p1` + <kbd>tab</kbd>    | Insert custom fig in grid  |
+| `strep` + <kbd>tab</kbd> | Insert fig cf repair(s)    |
+| `t1` + <kbd>tab</kbd>    | Insert fig in tiled layout |
+
+Slide pack snippets (for [polylux]-based presentations):
+
+| Snippet                   | Inserts              |
+| ------------------------- | -------------------- |
+| `sp` + <kbd>tab</kbd>     | slide pack block     |
+| `sptmpl` + <kbd>tab</kbd> | slide pack template  |
+| `ts` + <kbd>tab</kbd>     | title slide          |
+| `tc` + <kbd>tab</kbd>     | TOC slide            |
+| `ss` + <kbd>tab</kbd>     | section title slide  |
+| `s1` + <kbd>tab</kbd>     | slide, single column |
+| `s2` + <kbd>tab</kbd>     | slide, two columns   |
 
 ## What are snippets and how do they work?
 
@@ -74,3 +103,4 @@ Reload `.vimrc` and `:PlugInstall` to install plug-ins.
 [us]: https://github.com/SirVer/ultisnips
 [vp]: https://github.com/junegunn/vim-plug
 [ck]: https://github.com/ckunte/typst-snippets-vim
+[polylux]: https://typst.app/universe/package/polylux
