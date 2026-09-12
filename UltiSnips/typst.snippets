@@ -218,3 +218,409 @@ snippet ltmpl "Letter template" b
   name
 }
 endsnippet
+
+snippet fgg "Insert figures block in grid" b
+#figure(
+  grid(
+  columns: 2,
+  rows: 1,
+  gutter: 1mm,
+    image("${1:filename_incl_path}", width: 100%),
+    image("${2:filename_incl_path}", width: 100%),
+  ),
+  caption: [${3:Description}]
+) <${4:label}>
+endsnippet
+
+snippet fgr "Insert a figure (rotated) block" b
+#figure(
+  rotate( -90deg, reflow: true,
+    image("${1:filename_incl_path}", width: 100%),
+  ),
+  caption: [${2:Description}],
+) <${3:label}>
+endsnippet
+
+snippet toc "Insert TOC code" b
+// Contents of toc.typ
+#outline(
+  indent: 1em,
+  depth: 4,
+) // toc
+
+#context {
+  // Count the number of figures of kind "image"
+  let fig-count = query(figure.where(kind: image)).len()
+  let tbl-count = query(figure.where(kind: table)).len()
+
+  // Only render the outline if there are figures
+  if fig-count > 0 {
+    outline(
+      title: [List of Figures],
+      target: figure.where(kind: image),
+    )
+  }
+  // Only render the outline if there are tables
+  if tbl-count > 0 {
+    outline(
+      title: [List of Tables],
+      target: figure.where(kind: table),
+    )
+  }
+}
+endsnippet
+
+snippet ttl "Insert a title block" b
+#align(center, text(18pt)[
+  *${1:Title}*
+])
+endsnippet
+
+snippet ntmpl "Insert note template" b
+// Template for technical note (or paper)
+// Available from https://github.com/ckunte/note
+// 2025 C Kunte
+#let note(
+  // title of note (or paper)
+  title: [Note title],
+
+  // author of the note (or paper)
+  author: "Author",
+
+  // paper size:
+  paper: "a4",
+
+  // content of the note (or paper)
+  body,
+) = {
+  // metadata for the note (or paper)
+  set document(title: title, author: author)
+
+  // page properties
+  set page(
+    paper: paper,
+
+    // page numbering style
+    numbering: "1", // alternately "1 of 1"
+
+    // set margins based on paper size
+    margin: if paper == "a5" {
+      (x: 0.75in, y: 0.75in, top: 0.9in)
+    } else {
+      (x: 1.0in, y: 1.0in, top: 1.25in)
+    },
+
+    header: context {
+      // set custom header: make title appear on even pages
+      if calc.even(counter(page).get().first()) {
+        emph(title)
+      } else { none }
+
+      // make section appear on odd pages other than the first
+      let page-num = counter(page).get().first()
+      if page-num > 1 and calc.odd(page-num) {
+        let headings = query(heading)
+        let curr-heading = none
+        let found = false
+
+        for heading-elem in headings {
+          if heading-elem.location() != none and heading-elem.location().page() == page-num {
+            curr-heading = heading-elem.body
+            found = true
+          } else if heading-elem.location() != none and heading-elem.location().page() < page-num {
+            curr-heading = heading-elem.body // keep track of the last heading on a prev page
+          } else if found { break } // stop once we have moved past the curr page
+        }
+        align(right, emph(curr-heading))
+      } else { none }
+    }, // context ends
+  )
+
+  // font properties
+  set text(
+    font: "Segoe UI", // e.g. "STIX Two Text" or "erewhon",
+    top-edge: "cap-height",
+    bottom-edge: "baseline",
+    number-type: "old-style",
+    size: if paper == "a5" { 11pt } else { 12pt },
+  )
+
+  // small caps
+  let sc(content) = text(features: ("c2sc",))[#content]
+  show regex("[A-Z]{2,}"): match => {
+    sc(match)
+  }
+
+  // paragraph properties
+  set par(
+    spacing: 0.65em,
+    leading: 0.65em,
+    first-line-indent: 12pt,
+    justify: true
+  )
+
+  // raw text (or code)
+  show raw: set text(size: 7.5pt)
+
+  // table properties
+  show figure.where(
+    kind: table
+  ): set figure.caption(position: top)
+
+  // table stroke and row height
+  set table(
+    stroke: none,
+    row-gutter: -0.5em
+  )
+
+  // emphasise caption
+  show figure.caption: emph
+
+  // equation numbers
+  set math.equation(numbering: "(1)")
+
+  // link properties
+  show cite: set text(fill: maroon) // set cite colour
+  show link: set text(fill: rgb(0, 0, 255)) // set link colour
+  show link: underline
+
+  // colour terms
+  show regex("tb[a,c,d,u]"): set text(fill: red, style: "italic") // for to-be-[added/advised, confirmed, determined, updated]
+
+  // block quote properties
+  set quote(block: true)
+  show quote: set text(style: "italic")
+
+  // print title block (includes title, author, and date)
+  align(center)[
+    #text(2em)[*#title*]
+    #v(2em, weak: true)
+    #text(1em, author)
+    #v(1em, weak: true)
+    #datetime.today().display("[month repr:long] [day], [year]")
+    #v(5em, weak: true)
+  ]
+
+  //
+  body
+}
+/*
+
+// import this template into, say, main.typ like so, and edit
+// details (e.g. paper, title, and author): as required (e.g.):
+
+#import "template.typ": *
+#show: note.with(
+  paper: "a5",
+  title: [A technical note],
+  author: "C Kunte",
+)
+// content from here-on
+
+*/
+endsnippet
+
+# ---- scope specific ----
+
+snippet dwg "Insert a PDF drawing" b
+#image("img/${1:dwg_filename}.pdf", height:100%)
+endsnippet
+
+snippet loc "Insert a location figure" b
+#figure(
+  rect(image(fm.at(0) + "-loc.png", width: 100%)),
+  caption: [ORA-#fm.at(0) scope location]
+) <${1:label}>
+endsnippet
+
+snippet mrk "Insert a marked-up drawing rotated" b
+#figure(
+  rotate( -90deg, reflow: true,
+    image("img/" + fm.at(0) + "-markup.png", width: 100%),
+  ),
+  caption: [${1:Description}]
+) <${2:label}>
+endsnippet
+
+snippet p1 "Insert anomaly figures in a 2x1 grid" b
+#figure(
+  grid(
+//rows: 1,
+  columns: 2,
+  gutter: 1mm,
+    image("img/" + fm.sco + "-photo-1.png", width: 100%),
+    image("img/" + fm.sco + "-photo-2.png", width: 100%),
+  ),
+  caption: [${1:Defect photos}]
+) <${2:label}>
+endsnippet
+
+snippet strep "Insert a figure block re: structural repairs" b
+/* legend:
+[1] web plates + stiffen      [2] web / bott flange pl replace
+[3] column base               [4] flange pl + stiffen
+[5] beam-to-beam double plt   [6] side-mounted handrail base
+[7] top-mounted handrail base [8] handrail / kneerail / kick plt
+*/
+#image("img/KENT-SK-ST-00${1:num}_B.pdf", height:100%)
+endsnippet
+
+snippet t1 "Insert anomaly figures in a tiled layout" b
+#let gimage(path) = image(path, width: 100%, height: 6cm, fit: "cover")
+#figure(
+  grid(
+    columns: ${1:2},
+    gutter: 1mm,
+     gimage("img/" + fm.sco + "-photo-1.png"),
+     gimage("img/" + fm.sco + "-photo-2.png"),
+     gimage("img/" + fm.sco + "-photo-3.png"),
+     gimage("img/" + fm.sco + "-photo-4.png"),
+  ),
+  caption: [${2:Defect photos}]
+) <${3:label}>
+endsnippet
+
+# ---- slide pack (polylux) ----
+
+snippet sp "Insert a slide pack template" b
+#import "@preview/polylux:0.4.0": *
+#import "@local/slidepack:0.1.0": slidepack
+#show: slidepack.with(
+  title: [${1:title}],
+  author: "${2:author}",
+) // content from here-on
+
+${3}
+endsnippet
+
+snippet sptmpl "Insert slide pack template" b
+// Template for slide pack presentations
+// Available from https://github.com/ckunte/slidepack
+// 2025 C Kunte
+#import "@preview/polylux:0.4.0": toolbox
+
+#let slidepack(
+  // title of the slide pack
+  title: [Presentation title],
+
+  // author of the slide pack
+  author: "Author",
+
+  // content of the slide pack
+  body,
+) = {
+  // metadata for the slide pack
+  set document(title: title, author: author)
+
+  // page properties
+  set page(
+    paper: "presentation-16-9",
+    footer: align(right, text(size: 9pt, toolbox.slide-number)),
+    margin: auto,
+  )
+
+  // font properties
+  set text(
+    font: "Segoe UI",
+    size: 18pt,
+  )
+
+  // small caps
+  let sc(content) = text(features: ("c2sc",))[#content]
+  show regex("[A-Z]{2,}"): match => {
+    sc(match)
+  }
+
+  show heading: set block(below: 2em)
+
+  // link properties
+  show cite: set text(fill: maroon) // set cite colour
+  show ref: set text(fill: rgb(0, 0, 128)) // set reference colour
+  show link: set text(fill: rgb(0, 0, 255)) // set link colour
+  show link: underline
+  show footnote: set text(fill: maroon)
+  show footnote.entry: set text(fill: maroon)
+
+  //
+  body
+}
+/*
+
+// import this template into, say, main.typ like so, and edit
+// details (e.g. title and author): as required (e.g.):
+
+#import "@preview/polylux:0.4.0": *
+#import "@local/slidepack:0.1.0": slidepack
+#show: slidepack.with(
+  title: [A slide pack],
+  author: "C Kunte",
+)
+// content from here-on
+
+*/
+endsnippet
+
+snippet ts "Insert a title slide" b
+#slide[
+  #set page(footer: none)
+  #set align(center + horizon)
+
+  #toolbox.side-by-side[
+    #rect(height: 1.2fr)[#image("${1:img/cover.png}")]
+  ][
+
+  #text(1.8em)[*${2:Title}*]
+
+  _${3:Subtitle}_
+
+  ${4:Author} \ ${5:Date}
+
+  ]
+
+]
+endsnippet
+
+snippet tc "Insert a TOC slide" b
+#slide[
+
+  #set page(columns: 2)
+  #outline(depth: ${1:2})
+
+]
+endsnippet
+
+snippet ss "Insert a section title slide" b
+#slide[
+  #set align(center + horizon)
+  = ${1:Section title}
+
+]
+endsnippet
+
+snippet s1 "Insert a slide (single column)" b
+#slide[
+
+  = ${1:Heading}
+
+  ${2:content}
+
+]
+endsnippet
+
+snippet s2 "Insert a slide (two columns)" b
+#slide[
+
+  = ${1:Heading}
+
+  #toolbox.side-by-side[
+
+    ${2:left column content}
+
+  ][
+
+    ${3:right column content}
+
+  ]
+
+]
+endsnippet
